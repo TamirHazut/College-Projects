@@ -73,7 +73,7 @@ public class ClockPane extends Pane {
 	}
 
 	public void setCurrentTime() {
-		Clock calendar = new GregorianCalendarAdapter();
+		MyCalendar calendar = new CalendarAdapter();
 		this.hour = calendar.getHour();
 		this.minute = calendar.getMinute();
 		this.second = calendar.getSecond();

@@ -6,11 +6,11 @@ public class AnnounceTimeOnSeparateThread implements Runnable {
 	private AudioClip pmAudio = Applet.newAudioClip(this.getClass().getResource("/audio/pm.au"));
 	private int hour;
 	private int minute;
-	private Clock clock;
+	private MyCalendar clock;
 	private final static int NUM_OF_HOURS = 12;
 	private final static int NUM_OF_MINUTES = 60;
 
-	public AnnounceTimeOnSeparateThread(Clock clock) {
+	public AnnounceTimeOnSeparateThread(MyCalendar clock) {
 		this.clock = clock;
 		setHour(clock.getHour());
 		setMinute(clock.getMinute());

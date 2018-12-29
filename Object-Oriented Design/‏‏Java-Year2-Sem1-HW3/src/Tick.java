@@ -1,9 +1,14 @@
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javafx.application.Platform;
 
 public class Tick implements Runnable {
 	private int sleepTime = 1000;
 	private ClockPane clockPane;
+	private Lock lock = new ReentrantLock();
+	private Condition stopCondition = lock.newCondition();
 	private boolean suspended = false;
 
 	public Tick(ClockPane clockPane) {
@@ -12,23 +17,41 @@ public class Tick implements Runnable {
 
 	@Override
 	public void run() {
-		moveClock();
+		playClock();
 	}
 
-	protected void moveClock() {
-		try {
-			while (true) {
+	protected void playClock() {
+		while (true) {
+			lock.lock();
+			try {
 				if (isSuspended()) {
-					Thread.yield();
+					keepThreadSuspended();
 				} else {
-					Platform.runLater(() -> getClockPane().setCurrentTime());
-					Thread.sleep(sleepTime);
-					if (getClockPane().getSecond() == 0) {
-						new Thread(new AnnounceTimeOnSeparateThread(new GregorianCalendarAdapter())).start();
-					}
+					keepThreadPlaying();
 				}
+			} finally {
+				lock.unlock();
+			}
+		}
+	}
+
+	protected void keepThreadSuspended() {
+		try {
+			stopCondition.await();
+		} catch (InterruptedException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	protected void keepThreadPlaying() {
+		Platform.runLater(() -> getClockPane().setCurrentTime());
+		try {
+			Thread.sleep(sleepTime);
+			if (getClockPane().getSecond() == 0) {
+				new Thread(new AnnounceTimeOnSeparateThread(new CalendarAdapter())).start();
 			}
 		} catch (InterruptedException ex) {
+			ex.printStackTrace();
 		}
 	}
 
@@ -49,7 +72,13 @@ public class Tick implements Runnable {
 	}
 
 	protected void play() {
-		setSuspended(false);
+		lock.lock();
+		try {
+			setSuspended(false);
+			stopCondition.signal();
+		} finally {
+			lock.unlock();
+		}
 	}
 
 	protected void pause() {
