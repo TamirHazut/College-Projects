@@ -44,14 +44,25 @@ public class Tick implements Runnable {
 	}
 
 	protected void keepThreadPlaying() {
-		Platform.runLater(() -> getClockPane().setCurrentTime());
+		Platform.runLater(() -> {
+			setAndPlayTime();
+		});
 		try {
 			Thread.sleep(sleepTime);
-			if (getClockPane().getSecond() == 0) {
-				new Thread(new AnnounceTimeOnSeparateThread(new CalendarAdapter())).start();
-			}
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
+		}
+	}
+
+	protected void setAndPlayTime() {
+		getClockPane().setCurrentTime();
+		speakCurrentTime();
+		getClockPane().paintClock();
+	}
+
+	protected void speakCurrentTime() {
+		if (getClockPane().getSecond() == 0) {
+			new Thread(new AnnounceTimeOnSeparateThread(getClockPane().getHour(), getClockPane().getMinute())).start();
 		}
 	}
 

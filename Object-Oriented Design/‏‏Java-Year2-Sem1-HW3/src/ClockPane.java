@@ -77,10 +77,9 @@ public class ClockPane extends Pane {
 		this.hour = calendar.getHour();
 		this.minute = calendar.getMinute();
 		this.second = calendar.getSecond();
-		paintClock(); // Repaint the clock
 	}
 
-	private void paintClock() { // Initialize clock parameters
+	protected void paintClock() { // Initialize clock parameters
 		double clockRadius = Math.min(w, h) * 0.8 * 0.5;
 		double centerX = w / 2;
 		double centerY = h / 2;
