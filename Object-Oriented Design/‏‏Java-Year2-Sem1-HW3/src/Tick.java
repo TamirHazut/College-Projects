@@ -83,12 +83,13 @@ public class Tick implements Runnable {
 	}
 
 	protected void play() {
-		lock.lock();
-		try {
-			setSuspended(false);
-			stopCondition.signal();
-		} finally {
-			lock.unlock();
+		if (lock.tryLock()) {
+			try {
+				setSuspended(false);
+				stopCondition.signal();
+			} finally {
+				lock.unlock();
+			}
 		}
 	}
 
