@@ -2,6 +2,7 @@
 #define __CITY__
 
 #include "Kindergarten.h"
+#include "List.h"
 
 #define DATA_FILE "DataFile.txt"
 
@@ -21,6 +22,10 @@ int countChova(City* pCity);
 void sortByKindergartenName(City* pCity);
 void sortByTypeAndNumOfChildren(City* pCity);
 void sortByChildrenID(City* pCity);
+void kindergartensLinkedList(City* pCity);
+LIST* createLinkedListForKindergartenType(City* pCity,
+		int typeToCreateLinkedList);
+void displayKindergartensFromList(LIST* list);
 void releaseCity(City* pCity);
 
 #endif

@@ -1,7 +1,10 @@
 #include <stdio.h>
-
+#include <stdlib.h>
+#include <string.h>
 #include "City.h"
+#include "General.h"
 #include "Kindergarten.h"
+#include "List.h"
 
 void readCity(City* pCity) {
 	if (pCity->pGardenList != NULL) {
@@ -60,6 +63,41 @@ void sortByTypeAndNumOfChildren(City* pCity) {
 }
 void sortByChildrenID(City* pCity) {
 	SortKindergartenByChildrenID(pCity->pGardenList, pCity->count);
+}
+
+void kindergartensLinkedList(City* pCity) {
+	int typeToCreateLinkedList;
+	LIST* list;
+	typeToCreateLinkedList = getTypeOption();
+	list = createLinkedListForKindergartenType(pCity, typeToCreateLinkedList);
+	if (list != NULL) {
+		displayKindergartensFromList(list);
+		free(list);
+	}
+}
+LIST* createLinkedListForKindergartenType(City* pCity,
+		int typeToCreateLinkedList) {
+	LIST tempList;
+	LIST* list;
+	NODE* pNode;
+	int i;
+	L_init(&tempList);
+	pNode = &tempList.head;
+	for (i = 0; i < pCity->count; i++) {
+		if (pCity->pGardenList[i]->type == typeToCreateLinkedList) {
+			pNode = L_insert(pNode, pCity->pGardenList[i]);
+		}
+	}
+	list = (LIST*) malloc(sizeof(tempList));
+	if (!checkAllocation(list)) {
+		return NULL;
+	}
+	memcpy(list, &tempList, sizeof(tempList));
+	return list;
+}
+void displayKindergartensFromList(LIST* list) {
+	printf("Kindergartens list:\n");
+	L_print(list, showGarden);
 }
 
 void releaseCity(City* pCity) {

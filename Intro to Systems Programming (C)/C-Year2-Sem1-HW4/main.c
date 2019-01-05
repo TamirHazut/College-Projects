@@ -57,6 +57,7 @@ int main() {
 			sortByChildrenID(&utz);
 			break;
 		case LINKED_LIST:
+			kindergartensLinkedList(&utz);
 			break;
 		}
 

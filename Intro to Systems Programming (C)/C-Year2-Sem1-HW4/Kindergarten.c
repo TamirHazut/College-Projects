@@ -423,3 +423,4 @@ void SortKindergartenByChildrenID(Garden** pGardenList, int count) {
 	genericInsertionSort(pGarden->childPtrArr, pGarden->childCount,
 			sizeof(Child*), compareByChildrenID);
 }
+
