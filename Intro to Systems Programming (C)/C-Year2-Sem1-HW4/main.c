@@ -6,17 +6,23 @@
 #include "Child.h"
 #include "City.h"
 
-int main() {
+int main(int argc, char* argv[]) {
+	if (argc != 2) {
+		return 0;
+	}
+	int typeOfFile;
+	sscanf(argv[1],"%d",&typeOfFile);
+	printf("%d",typeOfFile);
 	City utz = { NULL, 0 };
 	int uReq;
 
 	//first time read
-	readCity(&utz);
+	readCity(&utz,typeOfFile);
 	do {
 		uReq = menu();
 		switch (uReq) {
 		case READ_CITY:
-			readCity(&utz);
+			readCity(&utz,typeOfFile);
 			break;
 
 		case SHOW_CITY:
@@ -28,7 +34,7 @@ int main() {
 			break;
 
 		case WRITE_CITY:
-			saveCity(&utz);
+			saveCity(&utz,typeOfFile);
 			break;
 
 		case ADD_GARDEN:

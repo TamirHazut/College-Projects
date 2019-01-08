@@ -12,7 +12,7 @@ const char* GardenTypeName[NofTypes] = { "Chova", "Trom Chova",
 //**************************************************
 // Read data off all Kindergartens from file
 //**************************************************
-Garden** readAllGardensFromFile(char* fileName, int* pGardenCount) {
+Garden** readAllGardensFromTextFile(char* fileName, int* pGardenCount) {
 	int count, i;
 	FILE *fp;
 	Garden** gardens;
@@ -37,7 +37,40 @@ Garden** readAllGardensFromFile(char* fileName, int* pGardenCount) {
 		gardens[i] = (Garden*) malloc(sizeof(Garden));
 		if (!checkAllocation(gardens[i]))
 			return NULL;
-		readGarden(fp, gardens[i]);
+		readGardenFromTextFile(fp, gardens[i]);
+	}
+
+	fclose(fp);
+
+	*pGardenCount = count;
+	return gardens;
+
+}
+Garden** readAllGardensFromBinFile(char* fileName, int* pGardenCount) {
+	int count, i;
+	FILE *fp;
+	Garden** gardens;
+
+	*pGardenCount = 0;
+
+	if ((fp = fopen(fileName, "rb")) == NULL) {
+		printf("Cannot Open File '%s'", fileName);
+		return NULL;
+	}
+	fread(&count, sizeof(int), 1, fp);
+
+	//Would like to do the allocation even if count ==0
+	//so will not return NULL as error
+	gardens = (Garden**) malloc(count * sizeof(Garden*));
+
+	if (!checkAllocation(gardens))
+		return NULL;
+
+	for (i = 0; i < count; i++) {
+		gardens[i] = (Garden*) malloc(sizeof(Garden));
+		if (!checkAllocation(gardens[i]))
+			return NULL;
+		readGardenFromBinFile(fp, gardens[i]);
 	}
 
 	fclose(fp);
@@ -50,7 +83,7 @@ Garden** readAllGardensFromFile(char* fileName, int* pGardenCount) {
 /**************************************************/
 /*             Read a Kindergarten from a file           */
 /**************************************************/
-void readGarden(FILE* fp, Garden* pGarden) {
+void readGardenFromTextFile(FILE* fp, Garden* pGarden) {
 	int i, type;
 	char sTemp[100];
 
@@ -81,7 +114,44 @@ void readGarden(FILE* fp, Garden* pGarden) {
 		pGarden->childPtrArr[i] = (Child*) malloc(sizeof(Child));
 		if (!checkAllocation(pGarden->childPtrArr[i]))
 			return;
-		readChild(fp, pGarden->childPtrArr[i]);
+		readChildFromTextFile(fp, pGarden->childPtrArr[i]);
+	}
+}
+void readGardenFromBinFile(FILE* fp, Garden* pGarden) {
+	int i, type, nameSize;
+	unsigned char temp;
+	//Kindergarten Name
+	//Get it to a temp string and then create the pointer to save
+	//in the struct in exact length.
+	fread(&nameSize, sizeof(int), 1, fp);
+	char sTemp[nameSize];
+	fread(&sTemp, nameSize * sizeof(char), 1, fp);
+	pGarden->name = getStrExactLength(sTemp);
+
+	//Kindergarten type
+	fread(&temp, sizeof(char), 1, fp);
+	type = temp & 0x3;
+	pGarden->type = (GardenType) type;
+
+	//Child count
+	temp = temp >> 2;
+	pGarden->childCount = temp & 0x3F;
+	if (pGarden->childCount == 0) {
+		pGarden->childPtrArr = NULL;
+		return;
+	}
+
+	pGarden->childPtrArr = (Child**) malloc(
+			pGarden->childCount * sizeof(Child*));
+	if (!checkAllocation(pGarden->childPtrArr))
+		return;
+
+	//Read each child
+	for (i = 0; i < pGarden->childCount; i++) {
+		pGarden->childPtrArr[i] = (Child*) malloc(sizeof(Child));
+		if (!checkAllocation(pGarden->childPtrArr[i]))
+			return;
+		readChildFromBinFile(fp, pGarden->childPtrArr[i]);
 	}
 
 }
@@ -123,7 +193,8 @@ void showTopKindergartens(char* kindergartenName, ...) {
 /**************************************************/
 /*            show a Kindergarten		           */
 /**************************************************/
-void showGarden(const Garden* pGarden) {
+void showGarden(const void* pGardenAsVoid) {
+	const Garden* pGarden = (const Garden*) pGardenAsVoid;
 	int i;
 
 	// Kindergarten name
@@ -140,7 +211,8 @@ void showGarden(const Garden* pGarden) {
 
 /**************************************************/
 
-void writeGardensToFile(Garden** pGardenList, int gardenCount, char* fileName) {
+void writeGardensToTextFile(Garden** pGardenList, int gardenCount,
+		char* fileName) {
 	int i;
 	FILE *fp;
 	if ((fp = fopen(fileName, "wt")) == NULL) {
@@ -149,15 +221,28 @@ void writeGardensToFile(Garden** pGardenList, int gardenCount, char* fileName) {
 	}
 	fprintf(fp, "%d\n", gardenCount);
 	for (i = 0; i < gardenCount; i++)
-		writeGarden(fp, pGardenList[i]);
+		writeGardenToTextFile(fp, pGardenList[i]);
 
+	fclose(fp);
+}
+void writeGardensToBinFile(Garden** pGardenList, int gardenCount,
+		char* fileName) {
+	int i;
+	FILE *fp;
+	if ((fp = fopen(fileName, "wb")) == NULL) {
+		printf("Cannot Open File '%s'", fileName);
+		return;
+	}
+	fwrite(&gardenCount, sizeof(int), 1, fp);
+	for (i = 0; i < gardenCount; i++)
+		writeGardenToBinFile(fp, pGardenList[i]);
 	fclose(fp);
 }
 
 /**************************************************/
 /*Write a Kindergarten to the open file						*/
 /**************************************************/
-void writeGarden(FILE* fp, const Garden* pGarden) {
+void writeGardenToTextFile(FILE* fp, const Garden* pGarden) {
 	int i;
 	//Kindergarten Name
 	fprintf(fp, "%s", pGarden->name);
@@ -167,7 +252,24 @@ void writeGarden(FILE* fp, const Garden* pGarden) {
 	fprintf(fp, " %d\n", pGarden->childCount);
 
 	for (i = 0; i < pGarden->childCount; i++)
-		writeChild(fp, pGarden->childPtrArr[i]);
+		writeChildToTextFile(fp, pGarden->childPtrArr[i]);
+}
+void writeGardenToBinFile(FILE* fp, const Garden* pGarden) {
+	int i, len;
+	unsigned char temp;
+	//Kindergarten Name
+	len = strlen(pGarden->name) + 1;
+	fwrite(&len, sizeof(int), 1, fp);
+	fwrite(pGarden->name, len * sizeof(char), 1, fp);
+
+	temp = pGarden->childCount & 0x3F;
+	temp = temp << 2;
+	temp = temp | pGarden->type;
+	fwrite(&temp, sizeof(char), 1, fp);
+
+	//Children
+	for (i = 0; i < pGarden->childCount; i++)
+		writeChildToBinFile(fp, pGarden->childPtrArr[i]);
 }
 
 //*************************************************
@@ -383,19 +485,6 @@ void release(Garden** pGardenList, int count) {
 
 }
 
-void genericInsertionSort(void* arr, int count, int size,
-		int (*compare)(const void*, const void*)) {
-	char *i, *j;
-	char* key = (char*) malloc(size);
-	for (i = (char*) arr + size; i < (char*) arr + count * size; i += size) {
-		memcpy(key, i, size);
-		for (j = i - size; j >= (char*) arr && compare(j, key) > 0; j -= size) {
-			memcpy(j + size, j, size);
-		}
-		memmove(j + size, key, size);
-	}
-	free(key);
-}
 int compareByKindergartenName(const void* kidnergarten1,
 		const void* kidnergarten2) {
 	Garden* k1 = *(Garden**) kidnergarten1;
@@ -420,7 +509,7 @@ void SortKindergartenByChildrenID(Garden** pGardenList, int count) {
 		printf("No such Kindergarten\n");
 		return;
 	}
-	genericInsertionSort(pGarden->childPtrArr, pGarden->childCount,
-			sizeof(Child*), compareByChildrenID);
+	insertionSort(pGarden->childPtrArr, pGarden->childCount, sizeof(Child*),
+			compareByChildrenID);
 }
 

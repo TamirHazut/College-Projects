@@ -48,3 +48,16 @@ int checkAllocation(const void* p) {
 	}
 	return 1;
 }
+void insertionSort(void* arr, int count, int size,
+		int (*compare)(const void*, const void*)) {
+	char *i, *j;
+	char* key = (char*) malloc(size);
+	for (i = (char*) arr + size; i < (char*) arr + count * size; i += size) {
+		memcpy(key, i, size);
+		for (j = i - size; j >= (char*) arr && compare(j, key) > 0; j -= size) {
+			memcpy(j + size, j, size);
+		}
+		memcpy(j + size, key, size);
+	}
+	free(key);
+}

@@ -8,10 +8,28 @@
 /**************************************************/
 /*             Read a Child from a file           */
 /**************************************************/
-void readChild(FILE* fp, Child* pChild) {
+void readChildFromTextFile(FILE* fp, Child* pChild) {
 	//Child ID
 	fscanf(fp, "%d", &pChild->id);
 	fscanf(fp, "%d", &pChild->age);
+}
+void readChildFromBinFile(FILE* fp, Child* pChild) {
+	//Child ID
+	unsigned char upperBits,lowerBits;
+	int id,age,temp;
+	fread(&lowerBits,sizeof(char),1,fp);
+	fread(&upperBits,sizeof(char),1,fp);
+	temp = 0;
+	temp = upperBits & 0xFF;
+	temp = temp << 8;
+	temp = temp | lowerBits;
+
+	id = temp & 0x1FFF;
+	pChild->id = id;
+
+	temp = temp >> 13;
+	age = temp & 0x7;
+	pChild->age = age;
 }
 
 /**************************************************/
@@ -36,8 +54,21 @@ void getChildFromUser(Child* pChild, int id)
 /**************************************************/
 /*Write a Child to the open file				*/
 /**************************************************/
-void writeChild(FILE* fp, const Child* pChild) {
+void writeChildToTextFile(FILE* fp, const Child* pChild) {
 	fprintf(fp, "%d %d\n", pChild->id, pChild->age);
+}
+void writeChildToBinFile(FILE* fp, const Child* pChild) {
+	unsigned char upperBits,lowerBits;
+	int temp;
+	temp = 0;
+	temp = pChild->age & 0x7;
+	temp = temp << 13;
+	temp = temp | pChild->id;
+	lowerBits = temp & 0xFF;
+	temp = temp >> 8;
+	upperBits = temp & 0xFF;
+	fwrite(&lowerBits,sizeof(char),1,fp);
+	fwrite(&upperBits,sizeof(char),1,fp);
 }
 
 //linear search

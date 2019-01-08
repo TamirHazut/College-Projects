@@ -21,5 +21,7 @@ typedef enum {
 int menu();
 char* getStrExactLength(char* inpStr);
 int checkAllocation(const void* p);
+void insertionSort(void* arr, int count, int size,
+		int (*compare)(const void*, const void*));
 
 #endif

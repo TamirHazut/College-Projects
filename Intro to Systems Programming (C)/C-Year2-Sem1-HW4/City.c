@@ -6,13 +6,18 @@
 #include "Kindergarten.h"
 #include "List.h"
 
-void readCity(City* pCity) {
+void readCity(City* pCity, int typeOfFile) {
 	if (pCity->pGardenList != NULL) {
 		releaseCity(pCity);
 		pCity->count = 0;
 	}
-	pCity->pGardenList = readAllGardensFromFile(DATA_FILE, &pCity->count);
-
+	if (typeOfFile) {
+		pCity->pGardenList = readAllGardensFromBinFile(DATA_BIN_FILE,
+				&pCity->count);
+	} else {
+		pCity->pGardenList = readAllGardensFromTextFile(DATA_TXT_FILE,
+				&pCity->count);
+	}
 	if (pCity->pGardenList == NULL)
 		printf("Error reading city information\n");
 }
@@ -25,8 +30,12 @@ void showSpecificGardenInCity(City* pCity) {
 	showGardenMenu(pCity->pGardenList, pCity->count);
 }
 
-void saveCity(City* pCity) {
-	writeGardensToFile(pCity->pGardenList, pCity->count, DATA_FILE);
+void saveCity(City* pCity, int typeOfFile) {
+	if (typeOfFile) {
+		writeGardensToBinFile(pCity->pGardenList, pCity->count, DATA_BIN_FILE);
+	} else {
+		writeGardensToTextFile(pCity->pGardenList, pCity->count, DATA_TXT_FILE);
+	}
 }
 
 void cityAddGarden(City* pCity) {
@@ -54,11 +63,11 @@ int countChova(City* pCity) {
 }
 
 void sortByKindergartenName(City* pCity) {
-	genericInsertionSort(pCity->pGardenList, pCity->count, sizeof(Garden*),
+	insertionSort(pCity->pGardenList, pCity->count, sizeof(Garden*),
 			compareByKindergartenName);
 }
 void sortByTypeAndNumOfChildren(City* pCity) {
-	genericInsertionSort(pCity->pGardenList, pCity->count, sizeof(Garden*),
+	insertionSort(pCity->pGardenList, pCity->count, sizeof(Garden*),
 			compareByKindergartenTypeAndNumOfChildren);
 }
 void sortByChildrenID(City* pCity) {

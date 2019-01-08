@@ -18,16 +18,20 @@ typedef struct {
 	int childCount;
 } Garden;
 
-Garden** readAllGardensFromFile(char* fileName, int* pGardenCount);
-void readGarden(FILE* fp, Garden* pGarden);
+Garden** readAllGardensFromTextFile(char* fileName, int* pGardenCount);
+Garden** readAllGardensFromBinFile(char* fileName, int* pGardenCount);
+void readGardenFromTextFile(FILE* fp, Garden* pGarden);
+void readGardenFromBinFile(FILE* fp, Garden* pGarden);
 GardenType getTypeOption();
 
 void showAllGardens(Garden** pGardenList, int count);
 void showTopKindergartens(char* kindergartenName, ...);
-void showGarden(const Garden* pGarden);
+void showGarden(const void* pGardenAsVoid);
 
-void writeGardensToFile(Garden** pGardenList, int gardenCount, char* fileName);
-void writeGarden(FILE* fp, const Garden* pGarden);
+void writeGardensToTextFile(Garden** pGardenList, int gardenCount, char* fileName);
+void writeGardensToBinFile(Garden** pGardenList, int gardenCount, char* fileName);
+void writeGardenToTextFile(FILE* fp, const Garden* pGarden);
+void writeGardenToBinFile(FILE* fp, const Garden* pGarden);
 
 void addChildToGarden(Garden** pGardenList, int gardenCount);
 Garden** addGarden(Garden** pGardenList, int* pGardenCount);
@@ -46,8 +50,6 @@ void handleBirthdayToChild(Garden** pGardenList, int count);
 
 void release(Garden** pGardenList, int count);
 
-void genericInsertionSort(void* arr, int count, int size,
-		int (*compare)(const void*, const void*));
 int compareByKindergartenName(const void* kidnergarten1,
 		const void* kidnergarten2);
 int compareByKindergartenTypeAndNumOfChildren(const void* kidnergarten1,
