@@ -81,6 +81,7 @@ void kindergartensLinkedList(City* pCity) {
 	list = createLinkedListForKindergartenType(pCity, typeToCreateLinkedList);
 	if (list != NULL) {
 		displayKindergartensFromList(list);
+		L_free(list);
 		free(list);
 	}
 }
