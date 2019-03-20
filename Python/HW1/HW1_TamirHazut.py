@@ -38,10 +38,7 @@ def q3_a(q3_a_tuple) -> set:
 
 def q3_b(q3_b_tuple) -> dict:
     temp_set = q3_a(q3_b_tuple)
-    temp_dict = {}
-    for i in range(len(temp_set)):
-        temp_dict[i] = temp_set[i]
-    return temp_dict
+    return dict(enumerate(temp_set))
 
 
 def q6_a():
