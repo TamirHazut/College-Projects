@@ -427,6 +427,19 @@ and all the non accepting states in the second. */
 	 * @return a boolean that indicates if the input is a member of this machine's language or not
 	 */
 	public boolean compute(String input) {
-		return false;
+		State state = this.initialState;
+		try {
+			do {
+				if (input.isEmpty()) {
+					return false;
+				}
+				char c = input.charAt(0);
+				input = input.substring(1);
+				state = this.transitions.applyTo(state, c);
+			} while (!this.acceptingStates.contains(state));
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }
