@@ -428,18 +428,14 @@ and all the non accepting states in the second. */
 	 */
 	public boolean compute(String input) {
 		State state = this.initialState;
-		try {
-			do {
-				if (input.isEmpty()) {
-					return false;
-				}
-				char c = input.charAt(0);
-				input = input.substring(1);
+		for (int i = 0; i < input.length(); i++) {
+			char c = input.charAt(i);
+			if (this.transitions.maps(state, c)) {
 				state = this.transitions.applyTo(state, c);
-			} while (!this.acceptingStates.contains(state));
-			return true;
-		} catch (Exception e) {
-			return false;
+			} else {
+				return false;
+			}
 		}
+		return this.acceptingStates.contains(state);
 	}
 }

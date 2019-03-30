@@ -8,7 +8,7 @@ public class Main implements Submission, Assignment1 {
 
 	public static void main(String[] args) throws Exception {
 		Main main = new Main();
-		if (main.compute("0 1/a b/0,a,0;0,b,1;1,a,0;1,b,1/0/1", "aatabb")) {
+		if (main.compute("0 1/a b/0,a,0;0,b,1;1,a,0;1,b,1/0/1", "aaabba")) {
 			System.out.print("accept");
 		} else {
 			System.out.print("Reject");
