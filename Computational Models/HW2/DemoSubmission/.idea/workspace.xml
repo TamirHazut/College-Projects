@@ -6,21 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80ec3733-d042-4a22-bca3-e1dc1fe49ca1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../FSM/test/TestAlphabetEnumeration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FSM/test/TestCanonicForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FSM/test/TestMinimization.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FSM/test/TestParsing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FSM/test/TestPrettyPrinting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assignment3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignment3.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/DemoSubmission_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/HW2_TamirHazut_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Assignment3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Assignment3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/junit_junit_4_12.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/junit_junit_4_12.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HW2_TamirHazut/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HW2_TamirHazut/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FSM/FSM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../FSM/FSM.iml" afterDir="false" />
-    </list>
+    <list default="true" id="80ec3733-d042-4a22-bca3-e1dc1fe49ca1" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,81 +19,7 @@
     <option name="delegatedBuild" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#693#694#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../FSM/test/TestAlphabetEnumeration.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="9" lean-forward="true" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../FSM/test/TestParsing.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../FSM/src/ac/il/afeka/fsm/DFSM.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2713">
-              <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../FSM/src/ac/il/afeka/fsm/NDFSM.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3961">
-              <caret line="235" column="16" selection-start-line="235" selection-start-column="16" selection-end-line="235" selection-end-column="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../FSM/src/ac/il/afeka/fsm/temp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1564">
-              <caret line="92" column="82" selection-start-line="92" selection-start-column="82" selection-end-line="92" selection-end-column="82" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../FSM/src/ac/il/afeka/fsm/TransitionFunction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1071">
-              <caret line="70" selection-start-line="70" selection-end-line="70" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -229,7 +141,7 @@
       <workItem from="1555954290581" duration="111000" />
       <workItem from="1555954516107" duration="55000" />
       <workItem from="1556044963145" duration="119000" />
-      <workItem from="1556045737632" duration="1298000" />
+      <workItem from="1556045737632" duration="1513000" />
     </task>
     <task id="LOCAL-00001" summary="Commit #0 - Starter">
       <created>1552814207120</created>
@@ -259,15 +171,21 @@
       <option name="project" value="LOCAL" />
       <updated>1555954378550</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Commit #2 - Completed.">
+      <created>1556047179889</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1556047179889</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57267000" />
+    <option name="totallyTimeSpent" value="57482000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1294" height="694" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14667746" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -343,7 +261,8 @@
     <MESSAGE value="Commit #1 - Finish" />
     <MESSAGE value="Commit #2 - Modifications" />
     <MESSAGE value="Commit #1 - Completed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit #1 - Completed." />
+    <MESSAGE value="Commit #2 - Completed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit #2 - Completed." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../FSM/out/production/FSM/ac/il/afeka/fsm/DFSM.class" />
@@ -353,13 +272,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="19" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../FSM/src/ac/il/afeka/fsm/Alphabet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="16" column="46" selection-start-line="16" selection-end-line="17" />
         </state>
       </provider>
     </entry>
@@ -409,20 +321,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../FSM/src/ac/il/afeka/fsm/temp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1564">
-          <caret line="92" column="82" selection-start-line="92" selection-start-column="82" selection-end-line="92" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../FSM/src/ac/il/afeka/fsm/TransitionFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1071">
-          <caret line="70" selection-start-line="70" selection-end-line="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../Submission.jar!/ac/il/afeka/Submission/Submission.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -430,10 +328,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../FSM/src/ac/il/afeka/fsm/DFSM.java">
+    <entry file="file://$PROJECT_DIR$/../FSM/src/ac/il/afeka/fsm/Alphabet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2713">
-          <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+        <state relative-caret-position="117">
+          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="66" lean-forward="true" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#693#694#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -454,6 +363,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../FSM/src/ac/il/afeka/fsm/DFSM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2713">
+          <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../FSM/src/ac/il/afeka/fsm/NDFSM.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3961">
@@ -464,14 +380,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
+    <entry file="file://$PROJECT_DIR$/../FSM/src/ac/il/afeka/fsm/temp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#693#694#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="295">
+          <caret line="92" column="82" selection-start-line="92" selection-start-column="82" selection-end-line="92" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FSM/src/ac/il/afeka/fsm/TransitionFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="70" selection-start-line="70" selection-end-line="70" />
         </state>
       </provider>
     </entry>
@@ -481,7 +400,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>HW2_TamirHazut:jar</last-edited>
+          <last-edited>DemoSubmission:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
