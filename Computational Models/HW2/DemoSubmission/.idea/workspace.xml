@@ -6,7 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80ec3733-d042-4a22-bca3-e1dc1fe49ca1" name="Default Changelist" comment="" />
+    <list default="true" id="80ec3733-d042-4a22-bca3-e1dc1fe49ca1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/out/production/HW1_TamirHazut/Main.class" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +21,7 @@
     <option name="delegatedBuild" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -69,9 +71,19 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="DemoSubmission" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FSM" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -142,6 +154,7 @@
       <workItem from="1555954516107" duration="55000" />
       <workItem from="1556044963145" duration="119000" />
       <workItem from="1556045737632" duration="1513000" />
+      <workItem from="1556457736011" duration="1210000" />
     </task>
     <task id="LOCAL-00001" summary="Commit #0 - Starter">
       <created>1552814207120</created>
@@ -182,19 +195,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57482000" />
+    <option name="totallyTimeSpent" value="58692000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1294" height="694" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14667746" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14910859" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection Results" weight="0.3291815" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49675852" weight="0.34875444" />
@@ -208,6 +220,7 @@
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.3291815" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5032415" side_tool="true" weight="0.3291815" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49675852" weight="0.3291815" />
+      <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.3291815" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />

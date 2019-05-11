@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb4033f6-b334-4119-9ca3-6fded9ffc150" name="Default Changelist" comment="Newton divided difference">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Computational Models/HW2/DemoSubmission/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Computational Models/HW2/DemoSubmission/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Computational Models/HW2/DemoSubmission/out/production/HW1_TamirHazut/Main.class" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,9 +48,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="width" value="818" />
-    <option name="height" value="859" />
+    <option name="x" value="-10" />
+    <option name="width" value="819" />
+    <option name="height" value="860" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -57,18 +58,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Midterm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Midterm" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -131,6 +122,7 @@
       <updated>1555169064917</updated>
       <workItem from="1555169075125" duration="3047000" />
       <workItem from="1555954491002" duration="75000" />
+      <workItem from="1556699833865" duration="26000" />
     </task>
     <task id="LOCAL-00001" summary="Newton divided difference">
       <created>1555171901925</created>
@@ -143,12 +135,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3122000" />
+    <option name="totallyTimeSpent" value="3148000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1294" height="694" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26256078" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.267423" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
