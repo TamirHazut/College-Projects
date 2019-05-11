@@ -118,13 +118,13 @@ def q5():
 
 
 if __name__ == '__main__':
-    # print(sum_lst((1, 4, 5, 10)))
-    # goto_replacement()
+    print(sum_lst((1, 4, 5, 10)))
+    goto_replacement()
     # 2.b - פרוצדורה
-    # acc1 = Account('Tamir', 313521965, 1150)
-    # acc2 = Account('Noy', 313586935, 3000)
-    # acc1.withdraw(50)
-    # acc2.transfer_through_accounts(acc1, 190)
-    # q3()
-    # q4()
+    acc1 = Account('Tamir', 313521965, 1150)
+    acc2 = Account('Noy', 313586935, 3000)
+    acc1.withdraw(50)
+    acc2.transfer_through_accounts(acc1, 190)
+    q3()
+    q4()
     q5()
