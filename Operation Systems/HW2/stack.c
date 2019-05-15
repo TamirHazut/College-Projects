@@ -22,8 +22,15 @@ int freeStack(Stack* stack) {
 
 int expandStack(Stack* stack) {
 	stack->data = realloc(stack->data, stack->totalElements * 2);
+	if (!stack->data) {
+		return 1;
+	}
 	stack->totalElements *= 2;
 	return 0;
+}
+
+void clearStack(Stack* stack) {
+	stack->top = -1;
 }
 
 int isEmpty(Stack* stack) {

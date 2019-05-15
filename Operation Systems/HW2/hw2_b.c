@@ -10,9 +10,11 @@
 
 int validArrayForThreadsWithMutex[NUM_OF_TASKS] = { 0 };
 int sudoku_board[81];
-int condition = 0;
-pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+int tasksCondition = 0, parentCondition = NUM_OF_THREADS_WITH_MUTEX-1;
+pthread_mutex_t tasksLock = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t tasksCond = PTHREAD_COND_INITIALIZER;
+pthread_mutex_t parentLock = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t parentCond = PTHREAD_COND_INITIALIZER;
 Stack* tasksStack;
 
 void get_board_for_threads(int argc, char* argv[]) {
@@ -35,11 +37,17 @@ void start_threads_with_mutex(char* filename) {
 	for (i = 0; i < NUM_OF_THREADS_WITH_MUTEX; i++) {
 		pthread_create(&threads_handlers[i], NULL, get_task_from_list, NULL);
 	}
+	pthread_mutex_lock(&parentLock);
+	while (parentCondition > 0) {
+		pthread_cond_wait(&parentCond, &parentLock);
+	}
 	for (i = 0; i < NUM_OF_THREADS_WITH_MUTEX; i++) {
 		pthread_join(threads_handlers[i], NULL);
 	}
-	pthread_mutex_destroy(&lock);
-	pthread_cond_destroy(&cond);
+	pthread_mutex_destroy(&tasksLock);
+	pthread_cond_destroy(&tasksCond);
+	pthread_mutex_destroy(&parentLock);
+	pthread_cond_destroy(&parentCond);
 	free(tasksStack);
 	checkValidArray(validArrayForThreadsWithMutex, filename);
 }
@@ -79,36 +87,48 @@ void create_tasks_for_threads() {
 
 void* get_task_from_list(void* args) {
 	Task task;
-	while(!isEmpty(tasksStack)) {
-		pthread_mutex_lock(&lock);
-		while (condition) {
-			pthread_cond_wait(&cond, &lock);
+	pthread_mutex_lock(&parentLock);
+	while (!isEmpty(tasksStack)) {
+		pthread_mutex_lock(&tasksLock);
+		while (tasksCondition) {
+			pthread_cond_wait(&tasksCond, &tasksLock);
 		}
-		condition = 1;
+		tasksCondition = 1;
 		pop(tasksStack, &task);
-		condition = 0;
-		pthread_cond_signal(&cond);
-		pthread_mutex_unlock(&lock);
-		doTask(&task);
+		tasksCondition = 0;
+		pthread_cond_signal(&tasksCond);
+		pthread_mutex_unlock(&tasksLock);
+		if (!doTask(&task)) {
+			clearStack(tasksStack);
+			break;
+		}
 	}
+	if (parentCondition == 0) {
+		pthread_cond_signal(&parentCond);
+	}
+	parentCondition--;
+	pthread_mutex_unlock(&parentLock);
 	pthread_exit(NULL);
 }
 
-void doTask(Task* task) {
+int doTask(Task* task) {
+	int taskResult = 0;
 	switch (task->type) {
 	case ROW:
-		validArrayForThreadsWithMutex[task->row] = checkForValidRow(
-				sudoku_board, task->row);
+		taskResult = checkForValidRow(sudoku_board, task->row);
+		validArrayForThreadsWithMutex[task->row] = taskResult;
 		break;
 	case COLUMN:
-		validArrayForThreadsWithMutex[task->column + SIZE] =
-				checkForValidColumn(sudoku_board, task->column);
+		taskResult = checkForValidColumn(sudoku_board, task->column);
+		validArrayForThreadsWithMutex[task->column + SIZE] = taskResult;
 		break;
 	case MATRIX:
+		taskResult = checkForValidMatrix(sudoku_board, task->row, task->column);
 		validArrayForThreadsWithMutex[task->row + task->column / 3 + SIZE * 2] =
-				checkForValidMatrix(sudoku_board, task->row, task->column);
+				taskResult;
 		break;
 	}
+	return taskResult;
 }
 
 int main(int argc, char* argv[]) {
