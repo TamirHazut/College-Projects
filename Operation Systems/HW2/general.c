@@ -82,10 +82,10 @@ void checkValidArray(int* validArray, char* filename) {
 	int i;
 	for (i = 0; i < NUM_OF_TASKS; i++) {
 		if (validArray[i] == 0) {
-			printf("%s is not legal.\n", filename);
+			printf("%s is not legal\n", filename);
 			return;
 		}
 	}
-	printf("%s is legal.\n", filename);
+	printf("%s is legal\n", filename);
 }
 

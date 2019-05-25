@@ -11,6 +11,7 @@ typedef struct {
 Stack* initStack(int size, int totalElements);
 int freeStack(Stack* stack);
 int expandStack(Stack* stack);
+void clearStack(Stack* stack);
 int isEmpty(Stack* stack);
 int isFull(Stack* stack);
 int push(Stack* stack, void* element);
