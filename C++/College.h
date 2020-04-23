@@ -1,9 +1,8 @@
-#pragma warning(disable: 4996)
-
 #ifndef _COLLEGE__H
 #define _COLLEGE__H
 
 #include <iostream>
+#include <vector>
 
 #include "Student.h"
 #include "Employee.h"
@@ -12,20 +11,18 @@
 #include "Guider.h"
 #include "Clerk.h"
 #include "Maintenance.h"
-#include <vector>
 
 using namespace std;
 
 class College
 {
 private:
-
 	// Members
 	vector<Employee*> workers;
 	vector<Student*> students;
 	vector<Course*> courses;
 	// Constructors
-	College();
+	College() {}
 	College(const College& c);
 	static College* college;
 
@@ -41,12 +38,12 @@ public:
 	Course* getCourseById(int id);
 
 	// Add/Remove functions for college
-	bool addEmployee(Employee* worker);
-	bool addStudent(Student* student);
-	bool addCourse( Course* course);
-	bool removeEmployee(Employee *employee);
-	bool removeStudent( Student * student);  
-	bool removeCourse( Course* course);
+	bool addEmployee(Employee& worker);
+	bool addStudent(Student& student);
+	bool addCourse( Course& course);
+	bool removeEmployee(Employee& employee);
+	bool removeStudent( Student& student);  
+	bool removeCourse( Course& course);
 
 	// Create/Delete functions (from menu)
 	Lecturer& createLecturer(const string & name, Date birthdate, int salary) const { return *(new Lecturer(name, birthdate, salary)); }
@@ -65,36 +62,35 @@ public:
 		vector<Student*>::const_iterator StudentItrEnd = students.end();
 		vector<Employee*>::const_iterator EmployeeItr = workers.begin();
 		vector<Employee*>::const_iterator EmployeeItrEnd = workers.end();
-		os << "Number of workers: " << workers.size() << "\\n" << endl;
+		os << "Number of workers: " << workers.size() << endl;
 		if (workers.size()> 0)
 		{
 			os << "Workers:" << endl;
 			for (; EmployeeItr != EmployeeItrEnd; ++EmployeeItr)
 			{
-				os << **EmployeeItr << endl;
+				os << **EmployeeItr;
 			}
 		}
-			
-		os << "--\nNumber of student: " << students.size() << "\n" << endl; 
+		os << "--\nNumber of student: " << students.size() << endl; 
 		if (students.size()> 0)
 		{
 			for (; StudentItr != StudentItrEnd; ++StudentItr)
 			{
-				os << **StudentItr << endl;
+				os << **StudentItr;
 			}
 		}
-		os << "--\nNumber of courses: " << courses.size() << "\n" << endl;
+		os << "--\nNumber of courses: " << courses.size() << endl;
 		if (courses.size() >0)
 		{
 			os << "Courses:" << endl;
 			for (; CourseItr != CourseItrEnd; ++CourseItr)
 			{
-				os << **CourseItr << endl;
+				os << **CourseItr;
 			}
 		}
 	}
 
-	friend ostream& operator<<(ostream& os, College& c) const 
+	friend ostream& operator<<(ostream& os, College& c)
 	{
 		c.show(os);
 		return os;

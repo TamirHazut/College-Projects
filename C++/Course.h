@@ -44,7 +44,6 @@ public:
 	void setName(const string& name);
 	/* Other Functions */
 
-	//need to be friend only for collage 
 	bool addStudent(Student* student);
 	bool deleteStudent(int id);
 	bool changeStudentTestGrade(int studentID, int grade);

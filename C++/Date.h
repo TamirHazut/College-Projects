@@ -29,15 +29,21 @@ public:
 
 	bool setDay(int day)
 	{
-		if (day < 0 || day > 31)	
+		if (day < 1 || day > 31)
+		{
+			this->day = 1;	
 			return false;
+		}
 		this->day = day;
 		return true;
 	}
 	bool setMonth(int month)
 	{
-		if (month < 0 || month > 12) 
+		if (month < 1 || month > 12)
+		{
+			this->month = 1;
 			return false;
+		}
 		this->month = month;
 		return true;
 	}
@@ -46,7 +52,10 @@ public:
 		time_t t = time(NULL);
 		tm* timePtr = localtime(&t);
 		if (year < 1900 || year > (1900 + timePtr->tm_year))
+		{
+			this->year = (1900 + timePtr->tm_year);
 			return false;
+		}
 		this->year = year;
 		return true;
 	}

@@ -7,16 +7,12 @@
 
 using namespace std;
 
-
-
 class FinalProject
 {
 private:
 	int projectId;
 	std::string projectName;
-	std::string description; // description
-	// Guider* guider; // pointer to project guider 
-	// Student* student; // pointer to student
+	std::string description;
 public:
 	FinalProject(const string& projectName, const string& desc) : projectId(IDGenerator::generateID(IDGenerator::eIDType::FINAL_PROJECT)), projectName(projectName), description(desc) {}
 	FinalProject(const FinalProject& OtherfinalProject);
@@ -32,7 +28,6 @@ public:
 
 	friend ostream& operator<<(ostream& os, const FinalProject& fp);
 	operator const char* () { return this->description.c_str(); }
-	// friend class College; // to allow it to use copy constructor 
 };
 
 #endif 

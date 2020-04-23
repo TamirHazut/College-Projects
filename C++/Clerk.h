@@ -15,7 +15,6 @@ public:
 	Clerk(const string& name, const Date& birthDate, int salary)
 	: Person(name, birthDate), Employee(name, birthDate, salary, Employee::eDepartment::ADMINISTRATION) {}
 	Clerk(const Clerk& clerk) = delete;
-	virtual ~Clerk();
 
 	Employee::eDepartment getDepartment() const { return this->department; }
 	void setDeprtment(Employee::eDepartment dep);

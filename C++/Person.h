@@ -25,7 +25,6 @@ public:
 		this->personID = p.personID;
 		this->birthDate = p.birthDate;
 	}
-	virtual ~Person();
 
 	// Getters / Setters
 	const string& getName() const { return this->personName; }

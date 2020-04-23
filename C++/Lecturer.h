@@ -13,7 +13,7 @@ class Course;
 class Lecturer : public Employee
 {
 private:
-	LinkedList<Course> courses;
+	LinkedList<Course*> courses;
 
 public:
 	Lecturer(const string& name, const Date& birthDate, int salary)
@@ -23,9 +23,9 @@ public:
 	
 	/* Getters/Setters */
 	int getNumOfCourses() const { return courses.size(); }
-	Course& getCourseById(int id);
-	bool addCourse(Course& course) { return courses.add(course); }
-	bool deleteCourse(const Course & course) { return courses.remove(*(new Course(course))); }
+	Course* getCourseById(int id);
+	bool addCourse(Course& course) { return courses.add(&course); }
+	bool deleteCourse(const Course & course) { return courses.remove(new Course(course)); }
 	bool changeGradeToStudent(int studentID, int courseID, double grade);
 
 	

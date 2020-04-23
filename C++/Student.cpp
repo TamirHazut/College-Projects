@@ -14,6 +14,8 @@
  }
  void Student::calculateAverage()
  {
+	 if (courses.empty())
+	 	return;
 	 int sum = 0;
 	 vector<Course*>::iterator itr = courses.begin();
 	 vector<Course*>::iterator itrEnd = courses.end();

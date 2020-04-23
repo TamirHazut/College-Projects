@@ -53,14 +53,14 @@ public:
             const Node<T>* pCurrentNode;  
     };
 
-    bool add(T& data)
+    bool add(T data)
     {
         int current = listSize;
         if (!isDataInList(data))
             *this += *(new Node<T>(data));
         return !(current == listSize);
     }
-    bool remove(T& data)
+    bool remove(T data)
     {
         int current = listSize;
         if (isDataInList(data))

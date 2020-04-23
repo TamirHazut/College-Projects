@@ -17,7 +17,6 @@ College* College::getInstance()
 // Getters
 Employee* College::getWorkerByWorkId(int id) 
 {
-	Employee* e = nullptr;
 	vector<Employee*>::iterator itr = workers.begin();
 	vector<Employee*>::iterator itrEnd = workers.end();
 	for (; itr != itrEnd; ++itr)
@@ -25,12 +24,11 @@ Employee* College::getWorkerByWorkId(int id)
 		if (id == (*itr)->getWorkId())
 			return *itr;
 	}
-	return e;
+	return nullptr;
 	
 }
  Student *College::getStudentById(int id) 
 {
-	Student* s = nullptr;
 	vector<Student*>::iterator itr = students.begin();
 	vector<Student*>::iterator itrEnd = students.end();
 	for (; itr != itrEnd; ++itr)
@@ -38,13 +36,12 @@ Employee* College::getWorkerByWorkId(int id)
 		if (id == (*itr)->getPersonID())
 		return *itr;
 	}
-	return s;
+	return nullptr;
 
 	
 }
  Course* College::getCourseById(int id) 
 {
-	Course *c= nullptr;
 	vector<Course*>::iterator itr = courses.begin();
 	vector<Course*>::iterator itrEnd = courses.end();
 	for (; itr != itrEnd; ++itr)
@@ -52,66 +49,66 @@ Employee* College::getWorkerByWorkId(int id)
 		if ((*itr)->getCourseID() == id)
 		  return *itr;
 	}
-	return c;
+	return nullptr;
 }
 
 // Add/Remove functions
-bool College::addEmployee( Employee* worker) 
+bool College::addEmployee( Employee& worker)
 {
 	if (!worker)
 		return false;
 		
-	if (getWorkerByWorkId(worker->getWorkId()))
+	if (getWorkerByWorkId(worker.getWorkId()))
 		return false;
 	
-	    *this += worker;
+	    *this += &worker;
 		 return true;
 }
-bool College::addStudent( Student* student)
+bool College::addStudent( Student& student)
 {
-	if (getStudentById(student->getPersonID()))
+	if (getStudentById(student.getPersonID()))
 		return false;
 
-	*this += student;
+	*this += &student;
 	 return true;
 }
-bool College::addCourse( Course* course)
+bool College::addCourse( Course& course)
 {
-	if (getCourseById(course->getCourseID()))
+	if (getCourseById(course.getCourseID()))
 		return false;
 
-    *this += course;
+    *this += &course;
 	 return true;
 }
 
-bool College::removeStudent( Student * student)
+bool College::removeStudent( Student& student)
 {
-	if (getStudentById(student->getPersonID()))
+	if (getStudentById(student.getPersonID()))
 	{
-	 *this -= student;
+	 *this -= &student;
 	 return true;
 	}
 	return false;
 }
-bool College::removeEmployee( Employee * employee)
+bool College::removeEmployee( Employee& employee)
 {
-	if (getWorkerByWorkId(employee->getWorkId()))
+	if (getWorkerByWorkId(employee.getWorkId()))
 	{
-		*this -= employee;
+		*this -= &employee;
 		return true;
 	}
 	return false;
 }
-bool College::removeCourse( Course *course)
+bool College::removeCourse( Course& course)
 {
-	    if(getCourseById(course->getCourseID()))
+	    if(getCourseById(course.getCourseID()))
 		{
 			vector<Student*>::iterator itr = students.begin();
 			vector<Student*>::iterator itrEnd = students.end();
 	         for (;itr!=itrEnd;++itr)
 			 {
 				 
-				 (*itr)->deleteCourse(course);
+				 (*itr)->deleteCourse(&course);
 		     }
 			 vector<Employee*>::iterator EmployeeItr = workers.begin();
 			 vector<Employee*>::iterator EmployeeitrEnd = workers.end();
@@ -120,11 +117,11 @@ bool College::removeCourse( Course *course)
 				 Employee* e = getWorkerByWorkId((*EmployeeItr)->getPersonID());
 				 if ( Lecturer*  lecturer = dynamic_cast<Lecturer*>(e)) 
 				 {
-					 lecturer->deleteCourse(*course);
+					 lecturer->deleteCourse(course);
 				 }
 
 			 }
-	    	*this -= course;
+	    	*this -= &course;
 		    return true;
 	}
 		return false;
@@ -148,47 +145,41 @@ const College& College::operator+=( Course* course)
 }
 const College& College::operator-=( Employee* employee) 
 {
-	vector<Employee*> newEmployee;
 	vector<Employee*>::iterator itr = workers.begin();
 	vector<Employee*>::iterator itrEnd = workers.end();
 	for (; itr != itrEnd; ++itr) 
 	{
 		if ((*itr)->getWorkId() != employee->getWorkId())
 		{
-			newEmployee.push_back(*itr);
+			workers.erase(itr);
 		}
 	}
-	workers = newEmployee;
 	return *this;
 }
 const College& College::operator-=( Student* student)
 {
-	vector <Student*> newStudent;
 	vector<Student*>::iterator itr = students.begin();
 	vector<Student*>::iterator itrEnd = students.end();
 	for (; itr != itrEnd; ++itr) 
 	{
 		if ((*itr)->getPersonID() != student->getPersonID()) 
 		{
-			newStudent.push_back(*itr);
+			students.erase(itr);
 		}
 	}
-	students = newStudent;
 	return *this;
 }
 const College& College::operator-=( Course* course)
 {
-	vector <Course*> newCourse;
 	vector<Course*>::iterator itr = courses.begin();
 	vector<Course*>::iterator itrEnd = courses.end();
 	for (; itr != itrEnd; ++itr)
 	{
 		if ((*itr)->getCourseID() != course->getCourseID())
 		{
-			newCourse.push_back(*itr);
+			courses.erase(itr);
 		}
 	}
-	courses = newCourse;
 	return *this;
 }
  

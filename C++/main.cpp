@@ -73,8 +73,8 @@ static void studentMenu(College& c)
 		<< "1. Print student by ID" << endl
 		<< "2. Add course" << endl
 		<< "3. Add FinalProject" << endl
-		<< "4. delete Course" << endl
-		<< "5. get Avarage Of Student" << endl
+		<< "4. Delete Course" << endl
+		<< "5. Student GPA" << endl
 	    << "0. To Exit" << endl
 		<< "Your option: ";
 	int  option;
@@ -186,9 +186,11 @@ static Date initDate()
 	cin >> day >> month >> year;
 	return Date(day, month, year);
 }
-static Employee& initEmployee(College& c, const string& name, Date birthdate, int salary, int department)
+static Employee& createEmployee(College& c, const string& name, Date birthdate, int salary, int department)
 {
 	Employee* e = nullptr;
+	Course*  course = nullptr;
+	Student* student = nullptr;
 	switch (department)
 	{
 		case 0:
@@ -196,8 +198,6 @@ static Employee& initEmployee(College& c, const string& name, Date birthdate, in
 		case 1:
 			return c.createGuider(name, birthdate, salary);
 		case 2:
-			Course*  course = nullptr;
-			Student* student = nullptr;
 			int studentID;
 			cout << "Enter student ID: ";
 			cin >> studentID;
@@ -214,12 +214,13 @@ static Employee& initEmployee(College& c, const string& name, Date birthdate, in
 			course = c.getCourseById(courseID);
 			if (!course)
 				return *e;
-
+			return c.createExerciseChecker(name, birthdate, salary, *student, course);
 		case 3:
 			return c.createClerk(name, birthdate, salary);
 		case 4:
 			return c.createMaintenance(name, birthdate, salary);
 	}
+	return *e;
 }
 void initWorker(College &c)
 {
@@ -240,7 +241,7 @@ void initWorker(College &c)
 		<< "4. Maintenance\n"
 		<< "Your option: ";
 	cin >> department;
-	if (c.addEmployee(&(initEmployee(c, name, birthDate, salary, department))))
+	if (c.addEmployee(createEmployee(c, name, birthDate, salary, department)))
 		cout << "Added Succesfully.\n";
 	else
 		cout << "Adding Failed.\n";
@@ -256,7 +257,7 @@ static void initCourse(College &c)
 		cout << "Enter course's test percent (0-100):" << endl;
 		cin >> testPercent;
 	} while (testPercent < 0 || testPercent > 100);
-	if (c.addCourse(new Course(name, testPercent)))
+	if (c.addCourse(*(new Course(name, testPercent))))
 		cout << "Added Succesfully.\n";
 	else
 		cout << "Adding Failed.\n";
@@ -275,7 +276,7 @@ static void initStudent(College &c)
 	cin >> currentSemester;
 	cout << "--College start date--" << endl;
 	Date startDate = initDate();
-	if (c.addStudent((new Student(name, birthDate, currentYear, currentSemester, startDate))))
+	if (c.addStudent(*(new Student(name, birthDate, currentYear, currentSemester, startDate))))
 		cout << "Added Succesfully.\n";
 	else
 		cout << "Adding Failed.\n";
@@ -287,7 +288,7 @@ static void deleteWorker(College &c)
 	cout << "Enter worker ID: ";
 	cin >> id;
 	Employee* employee = c.getWorkerByWorkId(id);
-	if (!(c.removeEmployee(employee)))
+	if (!(c.removeEmployee(*employee)))
 		cout << "Worker ID \"" << id << "\" was not found." << endl;
 	else
 		cout << "Worker ID \"" << id << "\" deleted." << endl;
@@ -298,7 +299,7 @@ static void deleteCourse(College &c)
 	cout << "---Enter course id";
 	cin >> id;
 	 Course* course = c.getCourseById(id);
-	if (course && c.removeCourse(course))
+	if (course && c.removeCourse(*course))
 		cout << "Course ID \"" << id << "\" deleted." << endl;
 	else
 		cout << "Course ID \"" << id << " \" was not found or deleted." << endl;
@@ -310,7 +311,7 @@ static void deleteStudent(College &c)
 	cout << "---Enter student ID----: " << endl;
 	cin >> id;
 	Student* student =c.getStudentById(id);
-	if (student && c.removeStudent(student))
+	if (student && c.removeStudent(*student))
 		cout << "Student ID \"" << id << "\" deleted." << endl;
 	else
 		cout << "Student ID \"" << id << "\" was not found or deleted." << endl;
@@ -358,7 +359,7 @@ static void addCourseToStudent(College& c)
 		cout << "Course ID: \"" << courseID << " \" was not found" << endl;
 		return;
 	}
-	if (student->addCourse(course) && course->addStudent(studentID))
+	if (student->addCourse(course) && course->addStudent(student))
 		cout << "Added Succesfully" << endl;
 	else
 		cout << "Adding Faild" << endl;
@@ -447,14 +448,16 @@ static void getAvarageStudent(College& c)
 	int studentID = 0;
 	cout << "Enter Id Of Student:" << endl;
 	cin >> studentID;
+	cout << "1\n";
 	Student *student = c.getStudentById(studentID);
+	cout << "2\n";
 	if (!student) 
 	{
 		cout << "Student ID: \"" << studentID << " \" was not found." << endl;
 		return;
 	}
 	student->calculateAverage();
-	cout << "Avarage of this Student is:" << student->getAverageOfStudent() << endl;
+	cout << student->getName() << " GPA is:" << student->getAverageOfStudent() << endl;
 }
 
 static void addCourseToLecturer(College&c)

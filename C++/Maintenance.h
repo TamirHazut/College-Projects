@@ -15,7 +15,6 @@ public:
 	Maintenance(const string& name, const Date& birthDate, int salary) 
 	: Person(name, birthDate), Employee(name, birthDate, salary, Employee::eDepartment::MAINTENANCE) {}
 	Maintenance(const Maintenance& maintenance) = delete;
-	virtual ~Maintenance();
 
 	Employee::eDepartment getDepartment() const { return this->department; }
 

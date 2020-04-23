@@ -25,7 +25,7 @@ public:
 	// Constructors / Destructor
 	Student(const char* name, const Date& birthDate, int currentYear, int currentSemester,
 		const Date& startDate, FinalProject* finalProject = nullptr) 
-		: Person(name, birthDate), currentYear(currentYear), currentSemester(currentSemester), startDate(startDate), finalProject(finalProject) {}
+		: Person(name, birthDate), currentYear(currentYear), currentSemester(currentSemester), startDate(startDate), finalProject(finalProject), average(0) {}
 	Student(const Student& s) : Person(s), startDate(s.startDate), finalProject(nullptr)
 	{
 		
@@ -55,33 +55,31 @@ public:
 
 	virtual void toOs(ostream& os) const override
 	{
-	int i = 0;
-	os << "Year of study: " << currentYear << ", Current semester: " << currentSemester << ", Number of courses: " << courses.size() << ", Start date: " << startDate << endl;
-	if (finalProject)
-		os << "Final project:\n" << *finalProject << endl;
-	if (courses.size() > 0)
-	{
-		os << "Courses:" << endl;
-		vector<Course*>::const_iterator itr = courses.begin();
-		vector<Course*>::const_iterator itrEnd = courses.end();
-		for (; itr != itrEnd; ++itr)
+		int i = 0;
+		os << "Year of study: " << currentYear << ", Current semester: " << currentSemester << ", Number of courses: " << courses.size() << ", Start date: " << startDate << endl;
+		if (finalProject)
+			os << "Final project:\n" << *finalProject << endl;
+		if (courses.size() > 0)
 		{
-			Grade* g = (*itr)->getGradeForStudent(getPersonID());
-			os << "[Course-" << (i + 1) << ":" << (*itr)->getName()
-			<< ", Test Grade: " << g->testGrade*(*itr)->getTestPercent()/100
-			<< ", Exercises Grade: " << g->exercisesGrade*(*itr)->getTestPercent()/100
-			<< "]" << endl;
-			i++;
-		}
-	}	
-	os << endl ;
+			os << "Courses:" << endl;
+			vector<Course*>::const_iterator itr = courses.begin();
+			vector<Course*>::const_iterator itrEnd = courses.end();
+			for (; itr != itrEnd; ++itr)
+			{
+				Grade* g = (*itr)->getGradeForStudent(getPersonID());
+				os << "[Course-" << (i + 1) << ":" << (*itr)->getName()
+				<< ", Test Grade: " << g->testGrade*(*itr)->getTestPercent()/100
+				<< ", Exercises Grade: " << g->exercisesGrade*(*itr)->getTestPercent()/100
+				<< "]" << endl;
+				i++;
+			}
+		}	
 	}
 
 	// Other Functions
 	bool addCourse(Course* course);
 	bool deleteCourse( Course *course);
 	void calculateAverage();
-	// friend ostream& operator<<(ostream& os, const Student& s);
 	bool operator==(int id) const { return this->getPersonID() == id; }
 
 private:
@@ -91,7 +89,6 @@ private:
 	const Student& operator +=( Course* course) ;
 	const Student& operator -=( Course* course);
 
-	// friend class College;
 };
 
 #endif 

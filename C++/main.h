@@ -14,6 +14,7 @@ static void mainMenu(College& c);
 
 //init fucntion
 static Date initDate();
+static Employee& createEmployee(College& c, const string& name, Date birthdate, int salary, int department);
 static void initWorker(College&c);
 static void initStudent(College &c);
 static void initCourse(College &c);

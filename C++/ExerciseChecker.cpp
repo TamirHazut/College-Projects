@@ -1,13 +1,7 @@
 #include "ExerciseChecker.h"
 
-ExerciseChecker::~ExerciseChecker()
-{
-    ((Student)*this).~Student();
-}
-
 double ExerciseChecker::getExerciseGradeByStudentId(int studentId) const 
 {
-	
 	Grade* grade = course->getGradeForStudent(studentId);
 	return (grade ? grade->exercisesGrade : -1);
 }

@@ -14,6 +14,7 @@ private:
 	
 
 public:
+
 	Guider(const string& name, const Date& birthDate, int salary,
 	FinalProject* finalProject = nullptr)
 		: Person(name, birthDate), Lecturer(name, birthDate, salary), finalProject(finalProject) {}
